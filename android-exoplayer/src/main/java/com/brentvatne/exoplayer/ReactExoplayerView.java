@@ -1082,6 +1082,7 @@ class ReactExoplayerView extends FrameLayout implements
             case CONTENT_RESUME_REQUESTED:
                 // AdEventType.CONTENT_RESUME_REQUESTED is fired when the ad is completed
                 // and you should start playing your content.
+                eventEmitter.adsContentResumeRequested();
                 mIsAdDisplayed = false;
                 break;
             case ALL_ADS_COMPLETED:

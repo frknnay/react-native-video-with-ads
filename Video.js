@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, requireNativeComponent, NativeModules, View, ViewPropTypes, Image, Platform, findNodeHandle, UIManager} from 'react-native';
+import { StyleSheet, requireNativeComponent, NativeModules, View, ViewPropTypes, Image, Platform, findNodeHandle, UIManager } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import TextTrackType from './TextTrackType';
 import VideoResizeMode from './VideoResizeMode.js';
@@ -30,17 +30,17 @@ export default class Video extends Component {
   setNativeProps(nativeProps) {
     this._root.setNativeProps(nativeProps);
   }
-  
+
   toTypeString(x) {
     switch (typeof x) {
       case "object":
-        return x instanceof Date 
-          ? x.toISOString() 
+        return x instanceof Date
+          ? x.toISOString()
           : JSON.stringify(x); // object, null
       case "undefined":
         return "";
       default: // boolean, number, string
-        return x.toString();      
+        return x.toString();
     }
   }
 
@@ -121,7 +121,7 @@ export default class Video extends Component {
 
   _onSeek = (event) => {
     if (this.state.showPoster && !this.props.audioOnly) {
-      this.setState({showPoster: false});
+      this.setState({ showPoster: false });
     }
 
     if (this.props.onSeek) {
@@ -185,7 +185,7 @@ export default class Video extends Component {
 
   _onPlaybackRateChange = (event) => {
     if (this.state.showPoster && event.nativeEvent.playbackRate !== 0 && !this.props.audioOnly) {
-      this.setState({showPoster: false});
+      this.setState({ showPoster: false });
     }
 
     if (this.props.onPlaybackRateChange) {
@@ -216,6 +216,12 @@ export default class Video extends Component {
       this.props.onAdsComplete(event.nativeEvent);
     }
   };
+
+  _onAdsContentResumeRequested = (event) => {
+    if (this.props.onBuffer) {
+      this.props.onAdsContentResumeRequested(event.nativeEvent);
+    }
+  }
 
   _onAdError = (event) => {
     if (this.props.onBuffer) {
@@ -310,7 +316,7 @@ export default class Video extends Component {
           />
           <Image
             style={posterStyle}
-            source={{uri: this.props.poster}}
+            source={{ uri: this.props.poster }}
           />
         </View>
       );
@@ -427,6 +433,7 @@ Video.propTypes = {
   onAdsComplete: PropTypes.func,
   onAdsLoaded: PropTypes.func,
   onAdStarted: PropTypes.func,
+  onAdsContentResumeRequested: PropTypes.func,
 
   /* Required by react-native */
   scaleX: PropTypes.number,

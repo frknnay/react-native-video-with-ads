@@ -1,6 +1,6 @@
 package com.brentvatne.exoplayer;
 
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 import android.view.View;
 
 import com.facebook.react.bridge.Arguments;
@@ -50,6 +50,7 @@ class VideoEventEmitter {
     private static final String EVENT_AD_ERROR = "onAdError";
     private static final String EVENT_ADS_LOADED = "onAdsLoaded";
     private static final String EVENT_AD_STARTED = "onAdStarted";
+    private static final String EVENT_AD_CONTENT_RESUME_REQUESTED = "onAdsContentResumeRequested";
 
     static final String[] Events = {
             EVENT_LOAD_START,
@@ -74,7 +75,8 @@ class VideoEventEmitter {
             EVENT_ADS_COMPLETED,
             EVENT_AD_ERROR,
             EVENT_ADS_LOADED,
-            EVENT_AD_STARTED
+            EVENT_AD_STARTED,
+            EVENT_AD_CONTENT_RESUME_REQUESTED
     };
 
     @Retention(RetentionPolicy.SOURCE)
@@ -101,7 +103,8 @@ class VideoEventEmitter {
             EVENT_ADS_COMPLETED,
             EVENT_AD_ERROR,
             EVENT_ADS_LOADED,
-            EVENT_AD_STARTED
+            EVENT_AD_STARTED,
+            EVENT_AD_CONTENT_RESUME_REQUESTED
     })
     @interface VideoEvents {
     }
@@ -233,6 +236,7 @@ class VideoEventEmitter {
         receiveEvent(EVENT_ADS_LOADED, null);
     }
     void adStarted() { receiveEvent(EVENT_AD_STARTED, null); }
+    void adsContentResumeRequested(){ receiveEvent(EVENT_AD_CONTENT_RESUME_REQUESTED, null);}
 
     void error(String errorString, Exception exception) {
         WritableMap error = Arguments.createMap();
