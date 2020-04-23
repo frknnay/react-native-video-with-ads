@@ -91,6 +91,14 @@ export default class Video extends Component {
     }
   }
 
+  resumeAds = () => {
+    if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(this.videoHandle, 2, null);
+    } else {
+      NativeModules.VideoManager.resumeAds();
+    }
+  }
+
   _assignRoot = (component) => {
     this._root = component;
   };

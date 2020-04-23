@@ -54,6 +54,7 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
 
     private static final int REQUEST_ADS_COMMAND = 0;
     private static final int START_ADS_COMMAND = 1;
+    private static final int RESUME_ADS_COMMAND = 2;
 
     @Override
     public String getName() {
@@ -232,6 +233,8 @@ public class ReactExoplayerViewManager extends ViewGroupManager<ReactExoplayerVi
             case START_ADS_COMMAND:
                 videoView.startAds();
                 break;
+            case RESUME_ADS_COMMAND:
+                videoView.resumeAds();
             default:
                 break;
         }

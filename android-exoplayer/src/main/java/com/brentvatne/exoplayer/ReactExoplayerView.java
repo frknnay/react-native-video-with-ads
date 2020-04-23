@@ -1050,6 +1050,10 @@ class ReactExoplayerView extends FrameLayout implements
         mAdsManager.start();
     }
 
+    public void resumeAds(){
+        mAdsManager.resume();
+    }
+
     @Override
     public void onAdError(AdErrorEvent adErrorEvent) {
         Log.e("IMA", "Ad Error: " + adErrorEvent.getError().getMessage());
